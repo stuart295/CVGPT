@@ -1,0 +1,91 @@
+<form (ngSubmit)="onSubmit()" #cvForm="ngForm">
+  <!-- Personal information -->
+  <div>
+    <h3>Personal Information</h3>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required [(ngModel)]="formData.name">
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required [(ngModel)]="formData.email">
+    <br>
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" required [(ngModel)]="formData.phone">
+    <br>
+
+    <!-- Social Media Links -->
+    <h4>Social Media Links</h4>
+    <label for="linkedin">LinkedIn:</label>
+    <input type="url" id="linkedin" name="linkedin" [(ngModel)]="formData.socialLinks.linkedin">
+    <br>
+    <label for="github">GitHub:</label>
+    <input type="url" id="github" name="github" [(ngModel)]="formData.socialLinks.github">
+    <br>
+    <label for="twitter">Twitter:</label>
+    <input type="url" id="twitter" name="twitter" [(ngModel)]="formData.socialLinks.twitter">
+    <br>
+    <label for="facebook">Facebook:</label>
+    <input type="url" id="facebook" name="facebook" [(ngModel)]="formData.socialLinks.facebook">
+    <br>
+
+    <!-- Summary -->
+    <h4>Summary</h4>
+    <textarea id="summary" name="summary" rows="4" cols="50" [(ngModel)]="formData.summary"></textarea>
+  </div>
+
+  <!-- Education -->
+  <div>
+    <h3>Education</h3>
+    <div *ngFor="let degree of formData.education; let i = index;">
+      <h4>Degree #{{i + 1}}</h4>
+      <label for="school">School:</label>
+      <input type="text" id="school" name="school" required [(ngModel)]="degree.school">
+      <br>
+      <label for="degree">Degree:</label>
+      <input type="text" id="degree" name="degree" required [(ngModel)]="degree.degree">
+      <br>
+      <label for="degree-startDate">Start Date:</label>
+      <input type="date" id="degree-startDate" name="degree-startDate" [(ngModel)]="degree.startDate">
+      <br>
+      <label for="degree-endDate">End Date:</label>
+      <input type="date" id="degree-endDate" name="degree-endDate" [(ngModel)]="degree.endDate">
+      <br>
+    </div>
+    <button type="button" (click)="addDegree()">Add Degree</button>
+  </div>
+
+  <!-- Work Experience -->
+  <div>
+    <h3>Work Experience</h3>
+    <div *ngFor="let job of formData.workExperience; let i = index;">
+      <h4>Job #{{i + 1}}</h4>
+      <label for="company">Company:</label>
+      <input type="text" id="company" name="company" [(ngModel)]="job.company">
+      <br>
+      <label for="position">Position:</label>
+            <input type="text" id="position" name="position" [(ngModel)]="job.position">
+      <br>
+      <label for="job-startDate">Start Date:</label>
+      <input type="date" id="job-startDate" name="job-startDate" [(ngModel)]="job.startDate">
+      <br>
+      <label for="job-endDate">End Date:</label>
+      <input type="date" id="job-endDate" name="job-endDate" [(ngModel)]="job.endDate">
+      <br>
+      <label for="job-location">Location:</label>
+      <input type="text" id="job-location" name="job-location" [(ngModel)]="job.location">
+      <br>
+      <label for="job-summary">Summary:</label>
+      <textarea id="job-summary" name="job-summary" rows="4" cols="50" [(ngModel)]="job.summary"></textarea>
+    </div>
+    <button type="button" (click)="addJob()">Add Job</button>
+  </div>
+
+  <!-- Skills -->
+  <div>
+    <h3>Skills</h3>
+    <label for="skills">Skills (comma-separated):</label>
+    <input type="text" id="skills" name="skills" [(ngModel)]="skillsInput" (blur)="parseSkills()">
+  </div>
+
+  <button type="submit" [disabled]="!cvForm.form.valid">Generate</button>
+</form>
+

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +6,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private http: HttpClient) {}
+  formSubmitted: boolean = false;
+  chatMessages: string[] = [];
 
-  generateCV() {
-    this.http.post('/api/generate_cv', {}).subscribe((response) => {
-      console.log(response);
-      // Update your PDF viewer component with the new PDF data
-    });
+  onFormSubmitted(formData: any) {
+    this.formSubmitted = true;
+    this.chatMessages.push('Form submitted with data:');
+    this.chatMessages.push(JSON.stringify(formData, null, 2));
   }
 }

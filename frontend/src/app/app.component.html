@@ -1,9 +1,9 @@
 <div style="display: flex;">
   <div style="width: 50%;">
-    <p>Hello there!</p>
-    <!-- Add your form components here -->
+    <app-cv-form *ngIf="!formSubmitted" (formSubmitted)="onFormSubmitted($event)"></app-cv-form>
+    <app-chat-window *ngIf="formSubmitted" [chatMessages]="chatMessages"></app-chat-window>
   </div>
   <div style="width: 50%;">
-    <!-- Add your PDF viewer component here -->
+    <!-- PDF viewer goes here -->
   </div>
 </div>
