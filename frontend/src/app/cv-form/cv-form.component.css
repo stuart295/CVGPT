@@ -2,6 +2,7 @@ form {
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;
+  padding: 64px;
 }
 
 h3, h4 {

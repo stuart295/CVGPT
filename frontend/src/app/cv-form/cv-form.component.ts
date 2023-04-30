@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { CvService } from '../services/cv.service';
+
 
 @Component({
   selector: 'app-cv-form',
@@ -44,8 +46,18 @@ export class CvFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  constructor(private cvService: CvService) {}
+
   onSubmit() {
-    this.formSubmitted.emit(this.formData);
+    this.cvService.generateCv(this.formData).subscribe(
+      (response) => {
+        console.log(response);
+        this.formSubmitted.emit(this.formData);
+      },
+      (error) => {
+        console.error('Error generating CV:', error);
+      }
+    );
   }
 
   addDegree() {

@@ -3,13 +3,13 @@
   <div>
     <h3>Personal Information</h3>
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required [(ngModel)]="formData.name">
+    <input type="text" id="name" name="name"  [(ngModel)]="formData.name">
     <br>
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required [(ngModel)]="formData.email">
+    <input type="email" id="email" name="email"  [(ngModel)]="formData.email">
     <br>
     <label for="phone">Phone:</label>
-    <input type="tel" id="phone" name="phone" required [(ngModel)]="formData.phone">
+    <input type="tel" id="phone" name="phone"  [(ngModel)]="formData.phone">
     <br>
 
     <!-- Social Media Links -->
@@ -38,10 +38,10 @@
     <div *ngFor="let degree of formData.education; let i = index;">
       <h4>Degree #{{i + 1}}</h4>
       <label for="school">School:</label>
-      <input type="text" id="school" name="school" required [(ngModel)]="degree.school">
+      <input type="text" id="school" name="school"  [(ngModel)]="degree.school">
       <br>
       <label for="degree">Degree:</label>
-      <input type="text" id="degree" name="degree" required [(ngModel)]="degree.degree">
+      <input type="text" id="degree" name="degree"  [(ngModel)]="degree.degree">
       <br>
       <label for="degree-startDate">Start Date:</label>
       <input type="date" id="degree-startDate" name="degree-startDate" [(ngModel)]="degree.startDate">
@@ -83,7 +83,7 @@
   <div>
     <h3>Skills</h3>
     <label for="skills">Skills (comma-separated):</label>
-    <input type="text" id="skills" name="skills" [(ngModel)]="skillsInput" (blur)="parseSkills()">
+    <textarea type="text" id="skills" name="skills" [(ngModel)]="skillsInput" (blur)="parseSkills()"></textarea>
   </div>
 
   <button type="submit" [disabled]="!cvForm.form.valid">Generate</button>
