@@ -55,7 +55,6 @@ export class CvFormComponent implements OnInit {
         this.formSubmitted.emit(this.formData);
         if (this.cvService.pdfBlob) {
           const cvPdfUrl = URL.createObjectURL(this.cvService.pdfBlob);
-//           const cvPdfUrl = this.cvService.pdfBlob;
           this.pdfGenerated.emit(cvPdfUrl);
         }
       },
