@@ -166,3 +166,5 @@ cython_debug/
 /.idea/vcs.xml
 /frontend/.vscode/.*
 /backend/openai_key
+/backend/static/out.pdf
+/backend/static/test.pdf

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, send_file
+from flask import Flask, render_template, jsonify, request, send_file, send_from_directory
 from flask_cors import CORS
 from cv_bot import CvBot
 from compile_latex import compile_latex
@@ -29,6 +29,12 @@ def generate_cv():
         return jsonify({"status": "error", "message": "LaTeX code validation or compilation failed."})
 
     return send_file(pdf_buffer, mimetype='application/pdf', as_attachment=True, download_name="cv.pdf")
+
+    # file_path = 'static'  # the folder where the sample PDF resides
+    # pdf_filename = 'out.pdf'
+    #
+    # # send the local file instead of generating a new one
+    # return send_from_directory(file_path, pdf_filename)
 
 
 if __name__ == "__main__":

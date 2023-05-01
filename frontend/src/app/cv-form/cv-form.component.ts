@@ -9,7 +9,7 @@ import { CvService } from '../services/cv.service';
 })
 export class CvFormComponent implements OnInit {
   @Output() formSubmitted = new EventEmitter<any>();
-  @Output() pdfGenerated = new EventEmitter<string>();
+  @Output() pdfGenerated = new EventEmitter<any>();
 
   formData = {
     name: '',
@@ -47,19 +47,17 @@ export class CvFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  constructor(private cvService: CvService) {
-    this.cvService.pdfGenerated.subscribe(() => {
-      if (this.cvService.pdfBlob) {
-        const cvPdfUrl = URL.createObjectURL(this.cvService.pdfBlob);
-        this.pdfGenerated.emit(cvPdfUrl);
-      }
-    });
-  }
+  constructor(private cvService: CvService) {}
 
   onSubmit() {
     this.cvService.generateCv(this.formData).subscribe(
       (response) => {
         this.formSubmitted.emit(this.formData);
+        if (this.cvService.pdfBlob) {
+          const cvPdfUrl = URL.createObjectURL(this.cvService.pdfBlob);
+//           const cvPdfUrl = this.cvService.pdfBlob;
+          this.pdfGenerated.emit(cvPdfUrl);
+        }
       },
       (error) => {
         console.error('Error generating CV:', error);

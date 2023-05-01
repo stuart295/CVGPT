@@ -1,9 +1,11 @@
-<div class="chat-history">
-  <div *ngFor="let message of chatMessages">
-    <p>{{message}}</p>
+<div class="container">
+  <div class="chat-history">
+    <div *ngFor="let message of chatMessages">
+      <p>{{message}}</p>
+    </div>
   </div>
-</div>
-<div class="chat-input">
-  <input [(ngModel)]="inputMessage" (keyup.enter)="sendMessage()" placeholder="Type your message...">
-  <button (click)="sendMessage()">Send</button>
+  <div class="chat-input">
+    <input [(ngModel)]="inputMessage" (keyup.enter)="sendMessage()" placeholder="Type your message...">
+    <button (click)="sendMessage()">Send</button>
+  </div>
 </div>

@@ -3,7 +3,6 @@ import subprocess
 import tempfile
 from io import BytesIO
 
-
 def compile_latex(latex_code):
     with tempfile.TemporaryDirectory() as temp_dir:
         output_filename = os.path.join(temp_dir, 'output')

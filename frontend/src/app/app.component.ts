@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   formSubmitted: boolean = false;
   chatMessages: string[] = [];
-  cvPdfUrl: string = "";
+  cvPdfUrl: any;
 
   onFormSubmitted(formData: any) {
     this.formSubmitted = true;
