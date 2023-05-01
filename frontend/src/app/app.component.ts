@@ -8,10 +8,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
   formSubmitted: boolean = false;
   chatMessages: string[] = [];
+  cvPdfUrl: string = "";
 
   onFormSubmitted(formData: any) {
     this.formSubmitted = true;
     this.chatMessages.push('Form submitted with data:');
     this.chatMessages.push(JSON.stringify(formData, null, 2));
+  }
+
+  onPdfGenerated(pdfUrl: string) {
+    this.cvPdfUrl = pdfUrl;
   }
 }

@@ -8,7 +8,7 @@ class CvBot:
     You will initially be given the user's CV information, after which you will be given a series of corrections to make to the generated code.
     To assist with editing, use the hyperref package to label each section of the CV Latex code so that the user to can mention area's of the section by name.
     Only output the code. Do not give any explanation or additional wording as your outputs will be compiled directly. Don't output Latex code that will fail to compile.
-    Keep the CV short (100 words or less).
+    Keep the CV short (50 words or less).
     """
 
     def __init__(self, api_key):

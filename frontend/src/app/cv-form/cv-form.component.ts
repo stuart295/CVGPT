@@ -9,6 +9,7 @@ import { CvService } from '../services/cv.service';
 })
 export class CvFormComponent implements OnInit {
   @Output() formSubmitted = new EventEmitter<any>();
+  @Output() pdfGenerated = new EventEmitter<string>();
 
   formData = {
     name: '',
@@ -46,12 +47,18 @@ export class CvFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  constructor(private cvService: CvService) {}
+  constructor(private cvService: CvService) {
+    this.cvService.pdfGenerated.subscribe(() => {
+      if (this.cvService.pdfBlob) {
+        const cvPdfUrl = URL.createObjectURL(this.cvService.pdfBlob);
+        this.pdfGenerated.emit(cvPdfUrl);
+      }
+    });
+  }
 
   onSubmit() {
     this.cvService.generateCv(this.formData).subscribe(
       (response) => {
-        console.log(response);
         this.formSubmitted.emit(this.formData);
       },
       (error) => {

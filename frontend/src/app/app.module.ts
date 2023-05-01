@@ -7,19 +7,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CvFormComponent } from './cv-form/cv-form.component';
 import { ChatWindowComponent } from './chat-window/chat-window.component';
 import { FormsModule } from '@angular/forms';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CvFormComponent,
-    ChatWindowComponent
+    ChatWindowComponent,
+    PdfViewerComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
      HttpClientModule,
-     FormsModule
+     FormsModule,
+     PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
