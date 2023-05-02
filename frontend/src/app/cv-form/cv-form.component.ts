@@ -41,7 +41,8 @@ export class CvFormComponent implements OnInit {
         summary: ''
       }
     ],
-    skills: []  as string[]
+    skills: []  as string[],
+    cv_instructions: ''
   };
 
   skillsInput: string = '';

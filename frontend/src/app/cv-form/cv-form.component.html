@@ -87,6 +87,13 @@
     <textarea type="text" id="skills" name="skills" [(ngModel)]="skillsInput" (blur)="parseSkills()"></textarea>
   </div>
 
+  <!--  Other-->
+  <div>
+    <h3>CV Instructions</h3>
+    <label for="cv_instructions">Additional instructions for the AI to consider:</label>
+    <textarea type="text" id="cv_instructions" name="cv_instructions" [(ngModel)]="formData.cv_instructions"></textarea>
+  </div>
+
   <button type="submit" [disabled]="!cvForm.form.valid">Generate</button>
 </form>
 

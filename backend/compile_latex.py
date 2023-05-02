@@ -12,7 +12,7 @@ def compile_latex(latex_code):
             tex_file.write(latex_code)
 
         # Run pdflatex to generate the PDF
-        subprocess.run(['pdflatex', '-output-directory', temp_dir, f'{output_filename}.tex'])
+        subprocess.run(['pdflatex', '-interaction=nonstopmode', '-output-directory', temp_dir, f'{output_filename}.tex'])
 
         # Read the generated PDF and return its content
         with open(f"{output_filename}.pdf", "rb") as pdf_file:
