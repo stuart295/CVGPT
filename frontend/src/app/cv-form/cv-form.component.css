@@ -3,19 +3,48 @@ form {
   flex-direction: column;
   font-family: Arial, sans-serif;
   padding: 64px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+}
+
+label:first-child {
+  margin-top: 0;
 }
 
 h3, h4 {
   margin-bottom: 5px;
+  color: #333;
 }
 
 label {
   margin-top: 10px;
+  font-weight: bold;
+  color: #555;
 }
 
 input, textarea {
   margin-top: 5px;
   width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+  border-color: #007bff;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
 button {
@@ -29,6 +58,12 @@ button {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0069d9;
 }
 
 button:disabled {

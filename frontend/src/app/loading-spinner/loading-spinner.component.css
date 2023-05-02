@@ -1,0 +1,27 @@
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Increase opacity to 0.8 */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.2); /* Change border color to a lighter shade */
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #ffffff; /* Change spinner color to white */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

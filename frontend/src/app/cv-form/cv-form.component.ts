@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CvService } from '../services/cv.service';
+import { SpinnerService } from '../shared/spinner.service';
 
 
 @Component({
@@ -47,11 +48,13 @@ export class CvFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  constructor(private cvService: CvService) {}
+  constructor(private cvService: CvService, private spinnerService: SpinnerService) {}
 
   onSubmit() {
+    this.spinnerService.show();
     this.cvService.generateCv(this.formData).subscribe(
       (response) => {
+        this.spinnerService.hide();
         this.formSubmitted.emit(this.formData);
         if (this.cvService.pdfBlob) {
           const cvPdfUrl = URL.createObjectURL(this.cvService.pdfBlob);
@@ -60,6 +63,7 @@ export class CvFormComponent implements OnInit {
       },
       (error) => {
         console.error('Error generating CV:', error);
+        this.spinnerService.hide();
       }
     );
   }

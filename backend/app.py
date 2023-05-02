@@ -46,7 +46,7 @@ def edit_cv():
     instructions = message_json['instr']
     print(f"Editing CV with instructions: {instructions}")
 
-    doc_latex = cv_bot.edit_cv(doc_latex, instructions)
+    doc_latex = cv_bot.edit_cv(instructions)
     print(doc_latex)
 
     try:

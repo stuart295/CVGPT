@@ -9,6 +9,7 @@ import { ChatWindowComponent } from './chat-window/chat-window.component';
 import { FormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
     AppComponent,
     CvFormComponent,
     ChatWindowComponent,
-    PdfViewerComponent
+    PdfViewerComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

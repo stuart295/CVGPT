@@ -1,4 +1,8 @@
-
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
   .chat-input {
     display: flex;
@@ -39,3 +43,26 @@
   .send-button:hover {
     background-color: #0069d9;
   }
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.download-button {
+  margin-top: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.download-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

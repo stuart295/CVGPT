@@ -1,9 +1,14 @@
-<div class="chat-input">
-  <textarea
-    [(ngModel)]="inputMessage"
-    (keyup.enter)="sendMessage()"
-    placeholder="Request changes..."
-    class="message-input"
-  ></textarea>
-  <button (click)="sendMessage()" class="send-button">Send</button>
+<div class="chat-container">
+  <div class="chat-input">
+    <textarea
+      [(ngModel)]="inputMessage"
+      (keyup.enter)="sendMessage()"
+      placeholder="Request changes..."
+      class="message-input"
+    ></textarea>
+    <div class="button-group">
+      <button (click)="sendMessage()" class="send-button">Send</button>
+      <button (click)="downloadPdf()" [disabled]="!cvPdfUrl" class="download-button">Download PDF</button>
+    </div>
+  </div>
 </div>

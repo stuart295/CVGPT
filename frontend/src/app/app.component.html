@@ -1,7 +1,8 @@
+<app-loading-spinner></app-loading-spinner>
 <div style="display: flex;" class="full-height">
   <div style="width: 50%;" class="full-height">
     <app-cv-form *ngIf="!formSubmitted" (formSubmitted)="onFormSubmitted($event)" (pdfGenerated)="onPdfGenerated($event)" class="full-width full-height"></app-cv-form>
-    <app-chat-window *ngIf="formSubmitted" [chatMessages]="chatMessages" (pdfGenerated)="onPdfGenerated($event)" class="full-width full-height"></app-chat-window>
+    <app-chat-window *ngIf="formSubmitted" [chatMessages]="chatMessages" [cvPdfUrl]="cvPdfUrl" (pdfGenerated)="onPdfGenerated($event)" class="full-width full-height"></app-chat-window>
   </div>
   <div style="width: 50%;" class="full-height">
     <app-pdf-viewer *ngIf="cvPdfUrl" [pdfUrl]="cvPdfUrl" class="full-width full-height"></app-pdf-viewer>
