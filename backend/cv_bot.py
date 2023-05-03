@@ -3,7 +3,7 @@ import openai
 
 
 class CvBot:
-    MODEL = "gpt-4"
+    MODEL = "gpt-4-0314"
     SYSTEM_MESSAGE_PATH = "./prompts/cv_bot_system_message.txt"
 
     def __init__(self, api_key):
