@@ -168,3 +168,4 @@ cython_debug/
 /backend/openai_key
 /backend/static/out.pdf
 /backend/static/test.pdf
+/backend/static/latex.txt

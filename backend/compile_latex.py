@@ -3,19 +3,32 @@ import subprocess
 import tempfile
 from io import BytesIO
 
+
 def compile_latex(latex_code):
-    with tempfile.TemporaryDirectory() as temp_dir:
-        output_filename = os.path.join(temp_dir, 'output')
+    with tempfile.TemporaryDirectory() as tempdir:
+        tex_file = os.path.join(tempdir, "temp.tex")
+        pdf_file = os.path.join(tempdir, "temp.pdf")
 
-        # Save the LaTeX code to a .tex file
-        with open(f"{output_filename}.tex", "w") as tex_file:
-            tex_file.write(latex_code)
+        with open(tex_file, "w") as f:
+            f.write(latex_code)
 
-        # Run pdflatex to generate the PDF
-        subprocess.run(['pdflatex', '-interaction=nonstopmode', '-output-directory', temp_dir, f'{output_filename}.tex'])
+        try:
+            # Compile twice to resolve references
+            for _ in range(2):
+                # Note: The --enable-installer flag is risky and shouldn't be used normally
+                result = subprocess.run(['pdflatex', '-interaction=nonstopmode',  '--enable-installer', '-output-directory', tempdir, tex_file], check=True, text=True, capture_output=False)
+                print(result.stdout)
 
-        # Read the generated PDF and return its content
-        with open(f"{output_filename}.pdf", "rb") as pdf_file:
-            pdf_content = pdf_file.read()
+            if os.path.exists(pdf_file):
+                with open(pdf_file, 'rb') as f:
+                    pdf_content = f.read()
 
-    return BytesIO(pdf_content)
+                pdf_buffer = BytesIO(pdf_content)
+                print("PDF generated successfully.")
+                return pdf_buffer
+            else:
+                print("Error: PDF file not found.")
+
+        except subprocess.CalledProcessError as e:
+            print(f"Error: {e.returncode}")
+            print(e.stderr)

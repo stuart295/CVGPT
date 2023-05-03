@@ -32,12 +32,16 @@ def generate_cv():
         return jsonify({"status": "error", "message": "LaTeX code validation or compilation failed."})
 
     return send_file(pdf_buffer, mimetype='application/pdf', as_attachment=True, download_name="cv.pdf")
-
-    # file_path = 'static'  # the folder where the sample PDF resides
-    # pdf_filename = 'out.pdf'
+    # doc_latex = open('static/latex.txt').read()
+    # try:
+    #     pdf_buffer = compile_latex(doc_latex)
+    # except Exception as e:
+    #     print(e)
+    #     return jsonify({"status": "error", "message": "LaTeX code validation or compilation failed."})
     #
-    # # send the local file instead of generating a new one
-    # return send_from_directory(file_path, pdf_filename)
+    # return send_file(pdf_buffer, mimetype='application/pdf', as_attachment=True, download_name="cv.pdf")
+
+
 
 @app.route("/api/edit_cv", methods=["POST"])
 def edit_cv():
