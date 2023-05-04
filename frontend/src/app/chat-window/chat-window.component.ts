@@ -9,37 +9,42 @@ import { SpinnerService } from '../shared/spinner.service';
 })
 export class ChatWindowComponent {
   @Input() chatMessages: string[] = [];
-  @Output() pdfGenerated = new EventEmitter<any>();
-  inputMessage: string = '';
+  @Output() pdfGenerated = new EventEmitter<string>();
+  inputMessage = '';
   @Input() cvPdfUrl: string | null = null;
 
-  constructor(private cvService: CvService, private spinnerService: SpinnerService) {}
+  constructor(
+    private cvService: CvService,
+    private spinnerService: SpinnerService
+  ) {}
 
-  sendMessage() {
-    if (this.inputMessage.trim() !== '') {
-      this.chatMessages.push(this.inputMessage);
-      let instr = {"instr": this.inputMessage}
+  sendMessage(): void {
+    const message = this.inputMessage.trim();
+
+    if (message) {
+      this.chatMessages.push(message);
+      const instructions = { instr: message };
 
       this.spinnerService.show();
-      this.cvService.editCv(instr).subscribe(
-      (response) => {
-        this.spinnerService.hide();
-        if (this.cvService.pdfBlob) {
-          this.cvPdfUrl = URL.createObjectURL(this.cvService.pdfBlob);
-          this.pdfGenerated.emit(this.cvPdfUrl);
+      this.cvService.editCv(instructions).subscribe(
+        () => {
+          this.spinnerService.hide();
+          if (this.cvService.pdfBlob) {
+            this.cvPdfUrl = URL.createObjectURL(this.cvService.pdfBlob);
+            this.pdfGenerated.emit(this.cvPdfUrl);
+          }
+        },
+        error => {
+          console.error('Error editing CV:', error);
+          this.spinnerService.hide();
         }
-      },
-      (error) => {
-        console.error('Error editing CV:', error);
-        this.spinnerService.hide();
-      }
-    );
+      );
 
       this.inputMessage = '';
     }
   }
 
-  downloadPdf() {
+  downloadPdf(): void {
     if (this.cvPdfUrl) {
       const link = document.createElement('a');
       link.href = this.cvPdfUrl;

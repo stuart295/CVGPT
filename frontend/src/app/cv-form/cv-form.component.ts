@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CvService } from '../services/cv.service';
 import { SpinnerService } from '../shared/spinner.service';
 
-
 @Component({
   selector: 'app-cv-form',
   templateUrl: './cv-form.component.html',
@@ -10,7 +9,7 @@ import { SpinnerService } from '../shared/spinner.service';
 })
 export class CvFormComponent implements OnInit {
   @Output() formSubmitted = new EventEmitter<any>();
-  @Output() pdfGenerated = new EventEmitter<any>();
+  @Output() pdfGenerated = new EventEmitter<string>();
 
   formData = {
     name: '',
@@ -41,20 +40,23 @@ export class CvFormComponent implements OnInit {
         summary: ''
       }
     ],
-    skills: []  as string[],
+    skills: [] as string[],
     cv_instructions: ''
   };
 
-  skillsInput: string = '';
+  skillsInput = '';
+
+  constructor(
+    private cvService: CvService,
+    private spinnerService: SpinnerService
+  ) {}
 
   ngOnInit(): void {}
 
-  constructor(private cvService: CvService, private spinnerService: SpinnerService) {}
-
-  onSubmit() {
+  onSubmit(): void {
     this.spinnerService.show();
     this.cvService.generateCv(this.formData).subscribe(
-      (response) => {
+      () => {
         this.spinnerService.hide();
         this.formSubmitted.emit(this.formData);
         if (this.cvService.pdfBlob) {
@@ -62,14 +64,14 @@ export class CvFormComponent implements OnInit {
           this.pdfGenerated.emit(cvPdfUrl);
         }
       },
-      (error) => {
+      error => {
         console.error('Error generating CV:', error);
         this.spinnerService.hide();
       }
     );
   }
 
-  addDegree() {
+  addDegree(): void {
     this.formData.education.push({
       school: '',
       degree: '',
@@ -78,7 +80,7 @@ export class CvFormComponent implements OnInit {
     });
   }
 
-  addJob() {
+  addJob(): void {
     this.formData.workExperience.push({
       company: '',
       position: '',
@@ -89,7 +91,9 @@ export class CvFormComponent implements OnInit {
     });
   }
 
-  parseSkills() {
-   this.formData.skills  = this.skillsInput.split(',').map(skill => skill.trim());
+  parseSkills(): void {
+    this.formData.skills = this.skillsInput
+      .split(',')
+      .map(skill => skill.trim());
   }
 }

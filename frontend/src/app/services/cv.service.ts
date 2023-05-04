@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CvService {
-  private API_ROOT = 'http://localhost:5001'
+  private API_ROOT = 'http://localhost:5001';
   private GEN_PATH = '/api/generate_cv';
   private EDIT_PATH = '/api/edit_cv';
   public pdfBlob: Blob | null = null;
@@ -20,10 +20,11 @@ export class CvService {
     const options = {
       headers,
       responseType: 'blob' as 'json',
+      observe: 'response' as const,
     };
 
     return this.httpClient
-      .post<Blob>(this.API_ROOT + this.GEN_PATH, cvData, { ...options, observe: 'response' })
+      .post<Blob>(this.API_ROOT + this.GEN_PATH, cvData, options)
       .pipe(
         tap((response: HttpResponse<Blob>) => {
           if (response.body) {
@@ -39,10 +40,11 @@ export class CvService {
     const options = {
       headers,
       responseType: 'blob' as 'json',
+      observe: 'response' as const,
     };
 
     return this.httpClient
-      .post<Blob>(this.API_ROOT + this.EDIT_PATH, message, { ...options, observe: 'response' })
+      .post<Blob>(this.API_ROOT + this.EDIT_PATH, message, options)
       .pipe(
         tap((response: HttpResponse<Blob>) => {
           if (response.body) {
