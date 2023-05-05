@@ -3,7 +3,7 @@ import openai
 import logging
 
 logger = logging.getLogger(__name__)
-
+logger.setLevel("DEBUG")
 
 class CvBot:
     MODEL = "gpt-4"

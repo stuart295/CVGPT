@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from cv_bot import CvBot
@@ -6,6 +8,7 @@ from compile_latex import compile_latex
 
 def create_app():
     app = Flask(__name__, static_folder="../frontend/dist/frontend", static_url_path="/")
+    app.logger.setLevel(logging.DEBUG)
     CORS(app)
     return app
 
@@ -52,6 +55,7 @@ def edit_cv():
     app.logger.info(f"Editing CV with instructions: {instructions}")
 
     doc_latex = cv_bot.edit_cv(instructions)
+    logging.debug(doc_latex)
 
     try:
         pdf_buffer = compile_latex(doc_latex)
