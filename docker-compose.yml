@@ -10,6 +10,6 @@ services:
 
   backend:
     build: ./backend
-    command: gunicorn --workers 4 --bind 0.0.0.0:5001 --timeout 600 app:app
+    command: gunicorn --workers 1 --bind 0.0.0.0:5001 --timeout 600 app:app
     ports:
       - '5001:5001'
